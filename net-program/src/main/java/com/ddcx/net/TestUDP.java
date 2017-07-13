@@ -40,6 +40,7 @@ public class TestUDP {
             byte[] bytes = new byte[1024];
             //byte[] bytes = new byte[10];
             DatagramPacket datagramPacket = new DatagramPacket(bytes, 0, bytes.length);
+            //receive方法会阻塞直到有datagramPacket被接受到，如果去掉这一步则服务器无法阻塞等待客户端信息发过来
             datagramSocket.receive(datagramPacket);
 
             byte[] data = datagramPacket.getData();
