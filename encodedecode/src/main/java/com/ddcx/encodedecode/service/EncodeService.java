@@ -23,7 +23,7 @@ public class EncodeService {
             log.debug("GBK编码后的结果：" + encode1);
 
             String encode2 = URLEncoder.encode(str, "utf-8");
-            log.debug("utf-8编码后的结果：" + encode1);
+            log.debug("utf-8编码后的结果：" + encode2);
             return encode;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
