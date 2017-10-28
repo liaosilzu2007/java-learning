@@ -11,6 +11,7 @@
     <modules>
         <module>net-program</module>
         <module>encodedecode</module>
+        <module>gson</module>
     </modules>
 
     <dependencies>
