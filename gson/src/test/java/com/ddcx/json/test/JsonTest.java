@@ -1,3 +1,5 @@
+package com.ddcx.json.test;
+
 import com.ddcx.json.entity.LoginResult;
 import com.ddcx.json.entity.Staff;
 import com.google.gson.Gson;

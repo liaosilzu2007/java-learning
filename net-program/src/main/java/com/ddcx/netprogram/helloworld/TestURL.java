@@ -1,4 +1,4 @@
-package com.ddcx.net;
+package com.ddcx.netprogram.helloworld;
 
 import org.junit.Test;
 

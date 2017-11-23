@@ -1,9 +1,8 @@
-package com.ddcx.net;
+package com.ddcx.netprogram.helloworld;
 
 import org.junit.Test;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Created by liaosi on 2017/7/9.

@@ -1,49 +1,49 @@
-package com.ddcx.exer;
+package com.ddcx.netprogram.helloworld;
 
-import javafx.beans.binding.When;
-import jdk.nashorn.internal.ir.WhileNode;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 /**
- * Created by liaosi on 2017/7/12.
+ * Created by liaosi on 2017/7/11.
  */
-//客户端给服务端发送文本，服务端会将文本转成大写再发给客户端
-public class TCPexer {
+//TCP编程例三：从客户端发送文件给服务端，服务端保存到本地。并返回“发送成功”给客户端。并关闭相应的连接。
+public class TestTCP3 {
 
     @Test
     public void client() {
         Socket socket = null;
+        FileInputStream fileInputStream = null;
         OutputStream outputStream = null;
-        InputStream inputStream = null;
-//        Scanner scanner = null;
         try {
-            socket = new Socket(InetAddress.getByName("127.0.0.1"), 9090);
+            socket = new Socket(InetAddress.getByName("localhost"), 9092);
+            //从本地获取一个文件发送给服务端
+            fileInputStream = new FileInputStream("D:/temp/1.jpg");
             outputStream = socket.getOutputStream();
-            /*System.out.println("请输入要发送的文本：");
-            scanner = new Scanner(System.in);
-            String msg = scanner.next();*/
-            String msg = "abcdefg";
-            outputStream.write(msg.getBytes());
-            socket.shutdownOutput();
-
-            inputStream = socket.getInputStream();
             byte[] bytes = new byte[1024];
             int length;
+            while ((length = fileInputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, length);
+            }
+            socket.shutdownOutput();
+            //接收来自于服务端的信息
+            InputStream inputStream = socket.getInputStream();
             while ((length = inputStream.read(bytes)) != -1) {
                 System.out.println(new String(bytes, 0, length));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             if (outputStream != null) {
                 try {
                     outputStream.close();
@@ -51,16 +51,6 @@ public class TCPexer {
                     e.printStackTrace();
                 }
             }
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-//            if (scanner != null) {
-//                scanner.close();
-//            }
             if (socket != null) {
                 try {
                     socket.close();
@@ -69,7 +59,6 @@ public class TCPexer {
                 }
             }
         }
-
     }
 
     @Test
@@ -77,21 +66,25 @@ public class TCPexer {
         ServerSocket serverSocket = null;
         Socket socket = null;
         InputStream inputStream = null;
+        FileOutputStream fileOutputStream = null;
         OutputStream outputStream = null;
         try {
-            serverSocket = new ServerSocket(9090);
+            serverSocket = new ServerSocket(9092);
             socket = serverSocket.accept();
             inputStream = socket.getInputStream();
+            //将从客户端发送来的信息保存到本地
+            fileOutputStream = new FileOutputStream("D:/temp/2.jpg");
             byte[] bytes = new byte[1024];
             int length;
-            StringBuilder response = new StringBuilder();
             while ((length = inputStream.read(bytes)) != -1) {
-                response.append(new String(bytes, 0, length));
+                fileOutputStream.write(bytes, 0, length);
             }
+            System.out.println("接受到来自" + socket.getInetAddress().getHostName() + "的文件，接受完毕！");
+            //socket.shutdownInput();
+            //发送"接收成功"的信息反馈给客户端
             outputStream = socket.getOutputStream();
-            if (StringUtils.isNotBlank(response.toString())) {
-                outputStream.write(response.toString().toUpperCase().getBytes());
-            }
+            String response = "服务端已接收完毕";
+            outputStream.write(response.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -105,6 +98,13 @@ public class TCPexer {
             if (outputStream != null) {
                 try {
                     outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -124,24 +124,5 @@ public class TCPexer {
                 }
             }
         }
-    }
-
-
-    /**
-     * IDEA中junit测试中无法获取键盘输入，但main方法中可以
-     */
-    @Test
-    public void testScanner() {
-        System.out.println("请输入字符串：");
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        System.out.println(str);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("请输入字符串：");
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        System.out.println(str);
     }
 }
