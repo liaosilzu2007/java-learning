@@ -12,6 +12,7 @@
         <module>net-program</module>
         <module>encode-decode</module>
         <module>gson</module>
+        <module>nio</module>
     </modules>
 
     <dependencies>
