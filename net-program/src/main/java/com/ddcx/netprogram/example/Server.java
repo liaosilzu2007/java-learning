@@ -3,6 +3,8 @@ package com.ddcx.netprogram.example;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by liaosi on 2017/11/23.
@@ -10,6 +12,7 @@ import java.net.Socket;
 public class Server {
 
     private static final int PORT = 9000;
+    private static final ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
 
     public static void main(String[] args) {
@@ -17,11 +20,14 @@ public class Server {
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("服务器启动了...");
-            //服务器在此阻塞
-            Socket socket = serverSocket.accept();
+            while (true) {
 
-            //启动一个新的线程来处理请求
-            new Thread(new ServerHandler(socket)).start();
+                //服务器在此阻塞
+                Socket socket = serverSocket.accept();
+
+                //启动一个新的线程来处理请求
+                threadPool.execute(new ServerHandler(socket));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
