@@ -22,10 +22,12 @@ public class ServerHandler implements Runnable {
         BufferedReader bufferedReader = null;
         PrintWriter printWriter = null;
         try {
+            //SoketInputStream 读数据的方式都是阻塞的
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             String line;
             StringBuilder info = new StringBuilder();
+            //注意：如果客户端发送的一行字符串末尾没有换行符，则readline方法将一直阻塞
             while ((line = bufferedReader.readLine()) != null) {
                 info.append(line).append("\n");
             }

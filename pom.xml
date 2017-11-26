@@ -13,6 +13,7 @@
         <module>encode-decode</module>
         <module>gson</module>
         <module>nio</module>
+        <module>multi-thread</module>
     </modules>
 
     <dependencies>
