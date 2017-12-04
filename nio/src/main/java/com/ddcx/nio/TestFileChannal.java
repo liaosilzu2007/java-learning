@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
 /**
  * Created by liaosi on 2017/11/24.
  */
-public class TestChannal {
+public class TestFileChannal {
 
     //利用通道完成文件的复制（非直接缓冲区）
     @Test
