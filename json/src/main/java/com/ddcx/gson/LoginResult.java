@@ -1,4 +1,4 @@
-package com.ddcx.json.entity;
+package com.ddcx.gson;
 
 /**
  * Created by liaosi on 2017/10/28.

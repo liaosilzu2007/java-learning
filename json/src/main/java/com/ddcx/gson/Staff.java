@@ -1,4 +1,4 @@
-package com.ddcx.json.entity;
+package com.ddcx.gson;
 
 import java.math.BigDecimal;
 import java.util.List;

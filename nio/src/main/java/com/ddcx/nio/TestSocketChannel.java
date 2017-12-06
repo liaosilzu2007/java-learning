@@ -23,8 +23,8 @@ public class TestSocketChannel {
         SocketChannel socketChannel = null;
         try {
             socketChannel = SocketChannel.open();
-            socketChannel.connect(new InetSocketAddress("127.0.0.1", 1234));
             socketChannel.configureBlocking(false);
+            socketChannel.connect(new InetSocketAddress("127.0.0.1", 1234));
 
             if (socketChannel.finishConnect()) {
                 int i = 0;
@@ -34,6 +34,12 @@ public class TestSocketChannel {
                     buffer.clear();
                     buffer.put(msg.getBytes());
                     buffer.flip();
+
+                    /*
+                    注意SocketChannel.write()方法的调用是在一个while循环中的。
+                    Write()方法无法保证能写多少字节到SocketChannel。
+                    所以，我们重复调用write()直到Buffer没有要写的字节为止。
+                     */
                     while (buffer.hasRemaining()) {
                         System.out.println(buffer);
                         socketChannel.write(buffer);

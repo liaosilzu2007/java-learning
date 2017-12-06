@@ -1,7 +1,5 @@
-package com.ddcx.json.test;
+package com.ddcx.gson;
 
-import com.ddcx.json.entity.LoginResult;
-import com.ddcx.json.entity.Staff;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * Created by liaosi on 2017/10/28.
  */
-public class JsonTest {
+public class GsonTest {
 
 
     @Test
