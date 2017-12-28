@@ -1,4 +1,4 @@
-package com.ddcx.nio;
+package com.ddcx.nio.channel;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
 /**
  * Created by liaosi on 2017/11/24.
  */
-public class TestFileChannal {
+public class FileChannalTest {
 
     //利用通道完成文件的复制（非直接缓冲区）
     @Test

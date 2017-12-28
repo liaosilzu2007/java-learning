@@ -1,4 +1,4 @@
-package com.ddcx.nio;
+package com.ddcx.nio.channel;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by liaosi on 2017/12/4.
  */
-public class TestSocketChannel {
+public class SocketChannelTest {
 
 
     @Test

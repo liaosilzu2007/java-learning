@@ -1,4 +1,4 @@
-package com.ddcx.nio;
+package com.ddcx.nio.buffer;
 
 
 import org.junit.Test;
@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by liaosi on 2017/7/2.
  */
-public class TestBuffer {
+public class BufferTest {
 
     @Test
     public void test1() {
