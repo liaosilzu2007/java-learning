@@ -1,4 +1,4 @@
-package com.ddcx.multithread.lock;
+package com.lzumetal.multithread.lock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

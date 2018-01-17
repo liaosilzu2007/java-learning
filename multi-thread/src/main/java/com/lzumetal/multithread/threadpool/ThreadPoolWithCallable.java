@@ -1,4 +1,4 @@
-package com.ddcx.multithread.threadpool;
+package com.lzumetal.multithread.threadpool;
 
 import org.junit.Test;
 

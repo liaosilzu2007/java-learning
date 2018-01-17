@@ -1,4 +1,4 @@
-package com.ddcx.multithread.threadpool;
+package com.lzumetal.multithread.threadpool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

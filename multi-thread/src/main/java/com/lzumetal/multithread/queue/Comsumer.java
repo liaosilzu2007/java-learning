@@ -1,4 +1,4 @@
-package com.ddcx.multithread.queue;
+package com.lzumetal.multithread.queue;
 
 import java.util.concurrent.BlockingQueue;
 

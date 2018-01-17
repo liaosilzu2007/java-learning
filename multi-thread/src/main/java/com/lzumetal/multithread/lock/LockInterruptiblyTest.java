@@ -1,4 +1,4 @@
-package com.ddcx.multithread.lock;
+package com.lzumetal.multithread.lock;
 
 /**
  * Created by liaosi on 2017/11/26.
