@@ -15,6 +15,7 @@
         <module>nio</module>
         <module>multi-thread</module>
         <module>generics</module>
+        <module>serialize</module>
     </modules>
 
     <dependencies>
