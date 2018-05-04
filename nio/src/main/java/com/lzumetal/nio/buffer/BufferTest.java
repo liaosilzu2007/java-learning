@@ -1,4 +1,4 @@
-package com.ddcx.nio.buffer;
+package com.lzumetal.nio.buffer;
 
 
 import org.junit.Test;
