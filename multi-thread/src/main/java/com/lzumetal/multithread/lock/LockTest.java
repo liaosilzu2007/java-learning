@@ -1,6 +1,7 @@
 package com.lzumetal.multithread.lock;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,31 +10,34 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LockTest implements Runnable {
 
-    private static ArrayList<Integer> list = new ArrayList<>();
+    private static Integer num = 100;
     private static Lock lock = new ReentrantLock();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         new Thread(new LockTest()).start();
 
         new Thread(new LockTest()).start();
+
+        TimeUnit.SECONDS.sleep(5L);
     }
 
     @Override
     public void run() {
-        Thread currentThread = Thread.currentThread();
+        String threadName = Thread.currentThread().getName();
         try {
-            lock.lock();    //获取锁
-            System.out.println(currentThread.getName() + " 得到了锁");
+            //lock.lock();    //获取锁
+            //System.out.println(threadName + " get lock");
 
             for (int i = 0; i < 5; i++) {
-                list.add(i);
+                System.out.println("sell the num = " + (num--));
+                Thread.sleep(500L);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            lock.unlock();
-            System.out.println(currentThread.getName() + " 释放了锁");
+            //lock.unlock();
+            //System.out.println(threadName + " realse lock");
         }
     }
 }
