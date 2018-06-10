@@ -46,4 +46,5 @@ class AtomicIncre implements Runnable {
         long end = System.currentTimeMillis();
         System.out.println("use AtomicIncre cost: " + (end - start) + "ms");
     }
+
 }

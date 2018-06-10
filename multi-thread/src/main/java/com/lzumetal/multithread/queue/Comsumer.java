@@ -13,14 +13,21 @@ public class Comsumer implements Runnable {
         this.queue = queue;
     }
 
+    /**
+     * 消费者一直不停地消费
+     */
     @Override
     public void run() {
         try {
-            System.out.println("comsumer:" + Thread.currentThread().getName() + " try to comsume a product");
-            String takedProduct = queue.take();
-            System.out.println("comsumer:" + Thread.currentThread().getName() + " get a product = " + takedProduct);
-        } catch (Exception e) {
+            while (true) {
+                System.out.println("----comsumer:" + Thread.currentThread().getName() + " try to comsume a product");
+                String takedProduct = queue.take();
+                System.out.println("----comsumer:" + Thread.currentThread().getName() + " get a product = \"" + takedProduct + "\"");
+            }
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -20,7 +20,7 @@ public class Producer implements Runnable {
     public void run() {
         try {
             System.out.println("producer:" + Thread.currentThread().getName() + " start make a product");
-            int millis = random.nextInt(5000);
+            int millis = random.nextInt(3000);
             TimeUnit.MILLISECONDS.sleep(millis);
             String product = "A product：made by" + Thread.currentThread().getName() + "---takes " + millis + " milliseconds";
             System.out.println("producer:" + Thread.currentThread().getName() + " has made a product");
