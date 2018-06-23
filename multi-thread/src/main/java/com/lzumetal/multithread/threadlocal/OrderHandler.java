@@ -16,6 +16,6 @@ public class OrderHandler implements Runnable {
     public void run() {
         EnvUtil.getUserIdContext().set(userId);
         orderService.addOrder(order);
-        orderService.updateStock(order);
+        orderService.updateStock(order.getGoodId(), order.getGoodCount());
     }
 }

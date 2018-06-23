@@ -1,7 +1,6 @@
 package com.lzumetal.multithread.threadlocal;
 
 import java.math.BigDecimal;
-import java.util.concurrent.TimeUnit;
 
 public class ThreadLocalTest {
 
