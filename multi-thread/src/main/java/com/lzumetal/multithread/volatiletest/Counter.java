@@ -19,7 +19,6 @@ public class Counter {
 
         sleep(1000);
         System.out.println("运行结果:Counter.count=" + Counter.count); //结果很可能<1000
-        System.gc();
     }
 
     private static void sleep(long millis) {
