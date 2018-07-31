@@ -23,7 +23,7 @@ public class OrderService {
     public void updateStock(Integer goodId, Integer goodCount) {
         //虽然更新库存不需要关注userId，但是在这里也一样能够获取到
         Integer userId = EnvUtil.getUserIdContext().get();
-        System.out.println(Thread.currentThread().getName() + "在更新库存中获取用户id-->" + userId);
+        System.out.println(Thread.currentThread().getName() + "在更新库存服务中获取用户id-->" + userId);
     }
 
 
