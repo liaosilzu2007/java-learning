@@ -1,0 +1,5 @@
+#English implementation
+com.lzumetal.javalean.spi.service.impl.EnglishHelloServiceImpl
+
+#Chinese implementation
+com.lzumetal.javalean.spi.service.impl.ChineseHelloServiceImpl

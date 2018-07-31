@@ -17,6 +17,7 @@
         <module>generics</module>
         <module>serialize</module>
         <module>jvm</module>
+        <module>spi</module>
     </modules>
 
     <dependencies>
