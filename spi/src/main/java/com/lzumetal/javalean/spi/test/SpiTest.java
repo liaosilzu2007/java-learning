@@ -22,4 +22,5 @@ public class SpiTest {
                     "|sayHello method:" + helloService.sayHello("world"));
         }
     }
+
 }
