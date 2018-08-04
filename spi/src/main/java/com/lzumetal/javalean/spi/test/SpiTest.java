@@ -16,7 +16,7 @@ public class SpiTest {
     public static void main(String[] args) {
         ServiceLoader<HelloService> serviceLoader = ServiceLoader.load(HelloService.class);
         Iterator<HelloService> serviceIterator = serviceLoader.iterator();
-        while (serviceIterator != null && serviceIterator.hasNext()) {
+        while (serviceIterator.hasNext()) {
             HelloService helloService = serviceIterator.next();
             System.out.println("calss:" + helloService.getClass().getName() +
                     "|sayHello method:" + helloService.sayHello("world"));
