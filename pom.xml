@@ -18,6 +18,7 @@
         <module>serialize</module>
         <module>jvm</module>
         <module>spi</module>
+        <module>proxy</module>
     </modules>
 
     <dependencies>
