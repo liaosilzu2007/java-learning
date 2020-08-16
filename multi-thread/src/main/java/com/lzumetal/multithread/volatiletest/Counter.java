@@ -1,32 +1,34 @@
 package com.lzumetal.multithread.volatiletest;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Counter {
 
     private volatile static int count = 0;
 
-    private static void inc() {
-        //延迟1毫秒，使得结果明显
-        sleep(1);
+    private static final int THREADS_COUNT = 10;
+
+    private static CountDownLatch countDownLatch = new CountDownLatch(THREADS_COUNT);
+
+    private static void increase() {
         count++;
     }
 
-    public static void main(String[] args) {
-
-        //同时启动1000个线程，去进行i++计算，看看实际结果
-        for (int i = 0; i < 1000; i++) {
-            new Thread(Counter::inc).start();
+    public static void main(String[] args) throws InterruptedException {
+        //同时启动10个线程，每个线程进行1万次i++计算
+        for (int i = 0; i < THREADS_COUNT; i++) {
+            new Thread(() -> {
+                for (int j = 0; j < 10000; j++) {
+                    increase();
+                }
+                countDownLatch.countDown();
+            }).start();
         }
 
-        sleep(1000);
-        System.out.println("运行结果:Counter.count=" + Counter.count); //结果很可能<1000
+        countDownLatch.await();
+        System.out.println("运行结果:Counter.count=" + Counter.count); //结果会<100000
     }
 
-    private static void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }
