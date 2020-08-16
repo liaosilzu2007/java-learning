@@ -24,11 +24,13 @@ public class CountDownTest2 {
                     begin.await();
                     System.out.println("运动员" + finalI + "开跑");
                     TimeUnit.SECONDS.sleep(new Random().nextInt(10));
+                    System.out.println("运动员" + finalI + "已到达终点！");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                } finally {
+                    end.countDown();
                 }
-                System.out.println("运动员" + finalI + "已到达终点！");
-                end.countDown();
+
             });
         }
         System.out.println("倒计时3秒.....");
