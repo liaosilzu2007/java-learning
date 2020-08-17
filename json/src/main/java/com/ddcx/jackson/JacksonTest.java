@@ -7,9 +7,11 @@ import org.junit.Test;
 import java.io.IOException;
 
 /**
+ * Jackson 使用演示
+ * <p>
  * Created by liaosi on 2017/12/6.
  */
-public class AnnotationTest {
+public class JacksonTest {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static final String STUDENT_JSON_STR = "{\"id\":2,\"name\":\"xiaoming\",\"age\":10}";
@@ -42,7 +44,6 @@ public class AnnotationTest {
         teacher.setId(100);
         teacher.setName("wangwu");
         teacher.setSubject("math");
-
         student.setTeacher(teacher);
 
         System.out.println(objectMapper.writeValueAsString(student));
@@ -52,7 +53,7 @@ public class AnnotationTest {
     public void includeTest() throws JsonProcessingException {
         Order order = new Order();
         order.setOrderNo("FEDI343539");
-        order.setType((byte)4);
+        order.setType((byte) 4);
         System.out.println(objectMapper.writeValueAsString(order));
     }
 }

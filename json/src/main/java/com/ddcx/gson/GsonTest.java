@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * gson使用演示
+ * <p>
  * Created by liaosi on 2017/10/28.
  */
 public class GsonTest {
@@ -32,14 +34,14 @@ public class GsonTest {
     }
 
 
+    /**
+     * 格式化json打印
+     */
     @Test
     public void test() {
 
         Staff staff = createDummyObject();
-
-//        Gson gson = new Gson();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
         String json = gson.toJson(staff);
         System.out.println(json);
 
