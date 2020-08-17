@@ -1,9 +1,11 @@
 package com.lzumetal.multithread.threadlocal;
 
-import com.google.gson.Gson;
+
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
+@ToString
 public class Order {
 
     private Integer id;     //订单id
@@ -59,9 +61,6 @@ public class Order {
         this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+
 
 }
