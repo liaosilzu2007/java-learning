@@ -175,3 +175,4 @@ hs_err_pid*
 .idea/
 encode-decode/src/test/java/com/ddcx/netprogram/
 gson/target/
+/proxy/target/
