@@ -1,4 +1,4 @@
-package com.lzumetal.multithread.threadpooltest;
+package com.lzumetal.multithread.threadpool;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class ThreadPoolTest {
 
     @Test
     public void testShutdown() throws InterruptedException {
-        ExecutorService threadpool = Executors.newFixedThreadPool(4);
+        ExecutorService threadpool = ThreadPoolUtil.getCustomThreadPool();
         //将4个任务提交到有4个线程的线程池
         threadpool.submit(new ShortTask());
         threadpool.submit(new ShortTask());

@@ -1,4 +1,4 @@
-package com.lzumetal.multithread.threadpooltest;
+package com.lzumetal.multithread.threadpool;
 
 public class ShortTask implements Runnable {
 

@@ -1,16 +1,15 @@
 package com.lzumetal.multithread.threadpool;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
-/**
- * Created by liaosi on 2017/11/26.
- */
-public class CallableTask {
+public class CallableTask implements Callable<String> {
 
-    public static void main(String[] args) {
-
-        ExecutorService threadPool = Executors.newFixedThreadPool(5);
-
+    @Override
+    public String call() throws Exception {
+        TimeUnit.SECONDS.sleep(5L);
+        return "success";
     }
+
+
 }
