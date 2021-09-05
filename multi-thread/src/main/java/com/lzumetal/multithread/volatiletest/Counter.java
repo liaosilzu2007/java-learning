@@ -18,13 +18,15 @@ public class Counter {
         //同时启动10个线程，每个线程进行1万次i++计算
         for (int i = 0; i < THREADS_COUNT; i++) {
             new Thread(() -> {
-                for (int j = 0; j < 10000; j++) {
-                    increase();
+                try {
+                    for (int j = 0; j < 10000; j++) {
+                        increase();
+                    }
+                } finally {
+                    countDownLatch.countDown();
                 }
-                countDownLatch.countDown();
             }).start();
         }
-
         countDownLatch.await();
         System.out.println("运行结果:Counter.count=" + Counter.count); //结果会<100000
     }

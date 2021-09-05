@@ -12,18 +12,12 @@ public class Singleton {
         if (instance == null) {
             synchronized (Singleton.class) {
                 if (instance == null) {
-                    a = 1;
-                    b = 2;
                     instance = new Singleton();
-                    c = a + b;
                 }
             }
         }
         return instance;
     }
 
-    public static void main(String[] args) {
-        System.out.println(1);
 
-    }
 }
