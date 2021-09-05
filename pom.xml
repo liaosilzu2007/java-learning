@@ -18,6 +18,7 @@
         <module>jvm</module>
         <module>spi</module>
         <module>proxy</module>
+        <module>immutable-object</module>
     </modules>
 
     <properties>
@@ -89,6 +90,13 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
+            </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>30.1.1-jre</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
