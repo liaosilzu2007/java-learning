@@ -1,7 +1,5 @@
 package com.ddcx.netprogram.exer;
 
-import javafx.beans.binding.When;
-import jdk.nashorn.internal.ir.WhileNode;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 

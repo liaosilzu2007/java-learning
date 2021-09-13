@@ -9,11 +9,11 @@ import java.net.Socket;
 /**
  * Created by liaosi on 2017/11/23.
  */
-public class ServerHandler implements Runnable {
+public class ServerSocketHandler implements Runnable {
 
     private Socket socket;
 
-    public ServerHandler(Socket socket) {
+    public ServerSocketHandler(Socket socket) {
         this.socket = socket;
     }
 
