@@ -35,9 +35,10 @@ public class SemaphoreTest {
                     log.info("{}进入了餐馆", customer);
                     TimeUnit.SECONDS.sleep(new Random().nextInt(5));
                     log.info("{}离开了餐馆", customer);
-                    semaphore.release();    //释放
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                } finally {
+                    semaphore.release();    //释放
                 }
             });
             futureList.add(future);
