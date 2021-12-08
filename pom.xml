@@ -18,6 +18,7 @@
         <module>spi</module>
         <module>proxy</module>
         <module>immutable-object</module>
+        <module>str</module>
     </modules>
 
     <properties>
