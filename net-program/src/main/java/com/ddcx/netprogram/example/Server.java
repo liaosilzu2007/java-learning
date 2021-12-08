@@ -21,12 +21,10 @@ public class Server {
             serverSocket = new ServerSocket(PORT);
             System.out.println("服务器启动了...");
             while (true) {
-
                 //服务器在此阻塞
                 Socket socket = serverSocket.accept();
-
-                //启动一个新的线程来处理请求
-                threadPool.execute(new ServerHandler(socket));
+                //提交给线程池中去处理请求
+                threadPool.execute(new ServerSocketHandler(socket));
             }
         } catch (Exception e) {
             e.printStackTrace();

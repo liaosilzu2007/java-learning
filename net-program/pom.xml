@@ -10,9 +10,18 @@
     <packaging>war</packaging>
     <name>net-program Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <dependencies>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
     </dependencies>
+
     <build>
         <finalName>net-program</finalName>
     </build>

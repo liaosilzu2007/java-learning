@@ -2,7 +2,6 @@ package com.ddcx.netprogram.example;
 
 import org.junit.Test;
 
-import javax.sound.midi.Soundbank;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,13 +25,12 @@ public class Example {
             System.out.println("服务器启动了");
             socket = serverSocket.accept();
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String readLine = bufferedReader.readLine();
             String line;
             StringBuilder info = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null) {
                 info.append(line).append("\n");
             }
-            System.out.println("服务端接收到了客户端发送的信息：" + readLine);
+            System.out.println("服务端接收到了客户端发送的信息：" + info);
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.write("我是服务端\n我已接收到了请求...");
         } catch (Exception e) {
