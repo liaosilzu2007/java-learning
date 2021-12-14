@@ -1,22 +1,28 @@
 package com.lzumetal.nio.selector;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import static com.lzumetal.nio.selector.Constants.*;
 
 /**
  * 类描述：NIO客户端
  * 创建人：liaosi
  * 创建时间：2017年12月08日
  */
+@Slf4j
 public class SocketChannelTest {
 
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 9090;
-    private static final int BUFFER_SIZE = 1024;
+
     private SocketChannel socketChannel;
     private ByteBuffer byteBuffer;
 
@@ -31,9 +37,10 @@ public class SocketChannelTest {
             byteBuffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
             byteBuffer.order(ByteOrder.BIG_ENDIAN);
 
-            TimeUnit.SECONDS.sleep(1);
             if (socketChannel.finishConnect()) {
-                sendData("send data to server".getBytes());
+                TimeUnit.SECONDS.sleep(new Random().nextInt(10));
+                sendData(("send data to server, from client " + Thread.currentThread().getName()).getBytes());
+                log.info("send data end...");
                 receive();
             } else {
                 System.out.println("连接服务器失败...");
@@ -60,8 +67,7 @@ public class SocketChannelTest {
             byteBuffer.flip();
             byte[] bytes = new byte[byteBuffer.limit()];
             byteBuffer.get(bytes, 0, count);
-            System.out.println("receive from server:" + new String(bytes, "utf-8"));
-            //System.out.println("receive from server:" + StandardCharsets.UTF_8.decode(byteBuffer));
+            log.info(Thread.currentThread().getName() + " receive from server:" + new String(bytes, StandardCharsets.UTF_8));
             byteBuffer.clear();
         }
     }
@@ -75,12 +81,26 @@ public class SocketChannelTest {
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            new SocketChannelTest().connectServer();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws InterruptedException {
+        int count = 10;
+        CountDownLatch countDownLatch = new CountDownLatch(count);
+        for (int i = 0; i < count; i++) {
+            try {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new SocketChannelTest().connectServer();
+                    }
+                }, "client-" + i).start();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                countDownLatch.countDown();
+            }
         }
+        countDownLatch.await();
+        log.info("all client connection completed !");
     }
 
 }

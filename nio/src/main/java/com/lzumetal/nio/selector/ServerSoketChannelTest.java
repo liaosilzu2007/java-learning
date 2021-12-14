@@ -1,5 +1,7 @@
 package com.lzumetal.nio.selector;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * 创建人：liaosi
  * 创建时间：2017年12月08日
  */
+@Slf4j
 public class ServerSoketChannelTest {
 
     private static final int PORT = 9090;
@@ -25,11 +28,11 @@ public class ServerSoketChannelTest {
     private ServerSocketChannel serverSocketChannel;
     private ByteBuffer byteBuffer;
     private Selector selector;
-    private int remoteClientNum = 0;
 
-    public ServerSoketChannelTest() {
+    public ServerSoketChannelTest(Selector selector) {
         try {
             //在创建一个新的服务器对象时，对服务器的属性进行初始化
+            this.selector = selector;
             init();
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,12 +44,11 @@ public class ServerSoketChannelTest {
     private void init() throws IOException {
         //创建ServerSoketChannel，设置为非阻塞，并绑定端口
         serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().setReuseAddress(true);
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.bind(new InetSocketAddress(PORT));
-        System.out.println("listener on port:" + PORT);
+        log.info(serverSocketChannel + "============listener on port:" + PORT);
 
-        //创建Selector
-        selector = Selector.open();
 
         //将通道注册到选择器上
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
@@ -63,7 +65,6 @@ public class ServerSoketChannelTest {
 
             //获取已经就绪的通道
             int select = selector.select();
-
             //如果已经没有已经就绪的通道，每隔1s查询一次
             if (select == 0) {
                 TimeUnit.SECONDS.sleep(1);
@@ -74,14 +75,11 @@ public class ServerSoketChannelTest {
             Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
             while (keyIterator.hasNext()) {
                 SelectionKey selectionKey = keyIterator.next();
-
                 //如果某个key对应的通道接收就绪
                 if (selectionKey.isAcceptable()) {
                     ServerSocketChannel serverChannel = (ServerSocketChannel) selectionKey.channel();
                     SocketChannel socketChannel = serverChannel.accept();
                     registerSocketChannel(selector, socketChannel, SelectionKey.OP_READ);
-                    remoteClientNum++;
-                    System.out.println("remote client number ----> " + remoteClientNum);
 
                     //向客户端发送数据
                     replyClient(socketChannel);
@@ -91,9 +89,9 @@ public class ServerSoketChannelTest {
                 if (selectionKey.isReadable()) {
                     readDataFromSocket(selectionKey);
                 }
-
                 keyIterator.remove();
             }
+
         }
     }
 
@@ -129,14 +127,26 @@ public class ServerSoketChannelTest {
         if (count < 0) {
             channel.close();
         }
+
     }
 
 
-    public static void main(String[] args) {
-        try {
-            new ServerSoketChannelTest().listener();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws IOException, InterruptedException {
+        //创建Selector
+        Selector selector = Selector.open();
+        for (int i = 0; i < 2; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new ServerSoketChannelTest(selector).listener();
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, "server-" + i).start();
+            TimeUnit.SECONDS.sleep(1);
+
         }
     }
 }
