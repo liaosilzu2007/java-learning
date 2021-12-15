@@ -19,6 +19,7 @@
         <module>proxy</module>
         <module>immutable-object</module>
         <module>str</module>
+        <module>algorithm</module>
     </modules>
 
     <properties>
