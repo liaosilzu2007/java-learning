@@ -1,14 +1,20 @@
 package com.lzumetal.multithread.work;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author liaosi
- * @date 2021-12-17
- */
+
 public class MainTest {
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTicketOfficeCreate() {
+        new TicketOffice(-1, 10);
+        new TicketOffice(100, -1);
+
+    }
 
 
     @Test
@@ -17,6 +23,7 @@ public class MainTest {
         ticketOffice.sellTicket();
         while (true) {
             int rtc = ticketOffice.getRemainTicketCount();
+            Assert.assertTrue(rtc >= 0);
             if (rtc == 0) {
                 break;
             }

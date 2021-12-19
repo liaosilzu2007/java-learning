@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author liaosi
- * @date 2021-12-17
+ * 售票商店
+ * <p>
+ * 一个售票商店有多个售票窗口（Window）
  */
 public class TicketOffice {
 
@@ -34,6 +35,9 @@ public class TicketOffice {
     }
 
 
+    /**
+     * 商店售票
+     */
     public void sellTicket() {
         final int k = windows.size();
         for (int i = 0; i < k; i++) {
@@ -41,17 +45,17 @@ public class TicketOffice {
             new Thread(() -> {
                 while (tickets.size() > 0) {
                     if (tickets.size() % k == window.getId()) {
-                        synchronized (obj) {
-                            if (tickets.size() > 0) {
-                                Ticket ticket = tickets.get(0);
-                                window.sell(ticket);
-                                tickets.remove(0);
-                            }
-                        }
                         try {
+                            synchronized (obj) {    //轻量级锁
+                                if (tickets.size() > 0) {
+                                    Ticket ticket = tickets.get(0);
+                                    tickets.remove(0);  //先移除，再调sell方法
+                                    window.sell(ticket);
+                                }
+                            }
                             TimeUnit.MILLISECONDS.sleep(100L);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        } catch (Throwable t) {
+                            t.printStackTrace();
                         }
                     }
                 }
@@ -61,6 +65,11 @@ public class TicketOffice {
     }
 
 
+    /**
+     * 剩余票的数量
+     *
+     * @return
+     */
     public int getRemainTicketCount() {
         return tickets.size();
     }

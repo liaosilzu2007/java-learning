@@ -4,8 +4,7 @@ package com.lzumetal.multithread.work;
 import java.time.LocalTime;
 
 /**
- * @author liaosi
- * @date 2021-12-17
+ * 售票窗口
  */
 public class Window {
 
@@ -34,8 +33,13 @@ public class Window {
                 '}';
     }
 
+    /**
+     * 售票
+     *
+     * @param ticket 出售的Ticket
+     */
     public void sell(Ticket ticket) {
-        System.out.println(LocalTime.now().toString() + "-" + name + " 卖出一张票：" + ticket);
+        System.out.println(LocalTime.now().toString() + " - " + name + " 卖出一张票：" + ticket);
     }
 
 }
