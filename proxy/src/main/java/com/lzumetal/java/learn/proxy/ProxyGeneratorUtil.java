@@ -1,6 +1,6 @@
 package com.lzumetal.java.learn.proxy;
 
-import com.lzumetal.java.learn.proxy.service.ServiceImpl;
+import com.lzumetal.java.learn.proxy.service.UserServiceImpl;
 import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
@@ -28,7 +28,7 @@ public class ProxyGeneratorUtil {
 
     public static void main(String[] args) {
 
-        Class<?> interfaces[] = {ServiceImpl.class};
+        Class<?> interfaces[] = {UserServiceImpl.class};
         //运行时，确保目录存在
         saveGenerateProxyClass("d:\\", interfaces);
 
