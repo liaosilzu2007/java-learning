@@ -20,6 +20,7 @@
         <module>immutable-object</module>
         <module>str</module>
         <module>algorithm</module>
+        <module>tree</module>
     </modules>
 
     <properties>
