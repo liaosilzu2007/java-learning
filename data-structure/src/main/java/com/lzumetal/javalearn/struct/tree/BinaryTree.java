@@ -1,6 +1,12 @@
 package com.lzumetal.javalearn.struct.tree;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author liaosi
@@ -12,10 +18,9 @@ public class BinaryTree {
     /**
      * 二叉树的二叉链表结点结构
      */
-    static class BiTNode<T> {
     @Getter
     @Setter
-    class BiTNode<T> {
+    static class BiTNode<T> {
 
         /* 节点数据 */
         private T data;
@@ -23,6 +28,11 @@ public class BinaryTree {
         /* 左右孩子指针 */
         private BiTNode lchild, rchild;
 
+        public BiTNode() {
+        }
+
+        public BiTNode(T e) {
+        }
 
     }
 
@@ -54,35 +64,7 @@ public class BinaryTree {
         inOrderTraverse(root.getLchild()); //中序遍历左子树
         System.out.println(root.getData()); //访问节点
         inOrderTraverse(root.getRchild()); //最后中序遍历右子树
-        public BiTNode() {
-        }
 
-        public <E> BiTNode(E e) {
-        }
-
-        public T getData() {
-            return data;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
-
-        public BiTNode getLchild() {
-            return lchild;
-        }
-
-        public void setLchild(BiTNode lchild) {
-            this.lchild = lchild;
-        }
-
-        public BiTNode getRchild() {
-            return rchild;
-        }
-
-        public void setRchild(BiTNode rchild) {
-            this.rchild = rchild;
-        }
     }
 
 
