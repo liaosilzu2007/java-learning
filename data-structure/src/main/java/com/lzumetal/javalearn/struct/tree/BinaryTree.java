@@ -28,10 +28,8 @@ public class BinaryTree {
         /* 左右孩子指针 */
         private BiTNode lchild, rchild;
 
-        public BiTNode() {
-        }
-
-        public BiTNode(T e) {
+        public BiTNode(T data) {
+            this.data = data;
         }
 
     }
