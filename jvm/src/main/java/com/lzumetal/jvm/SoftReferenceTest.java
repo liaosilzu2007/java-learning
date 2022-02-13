@@ -1,4 +1,4 @@
-package com.lzumetal.jvmtest;
+package com.lzumetal.jvm;
 
 import org.junit.Test;
 

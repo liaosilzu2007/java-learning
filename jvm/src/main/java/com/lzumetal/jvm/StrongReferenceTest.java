@@ -1,4 +1,4 @@
-package com.lzumetal.jvmtest;
+package com.lzumetal.jvm;
 
 import java.util.ArrayList;
 import java.util.List;

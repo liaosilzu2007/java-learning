@@ -1,4 +1,4 @@
-package com.lzumetal.jvmtest;
+package com.lzumetal.jvm;
 
 import java.io.PrintStream;
 
