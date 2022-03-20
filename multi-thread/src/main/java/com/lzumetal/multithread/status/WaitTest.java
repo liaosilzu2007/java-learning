@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WaitTest {
 
-    public static final Object obj = new Object();
+    private static final Object obj = new Object();
 
     @Test
     public void testWait() throws InterruptedException {
