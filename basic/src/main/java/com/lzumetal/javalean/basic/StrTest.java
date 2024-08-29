@@ -1,4 +1,4 @@
-package com.lzumetal.javalean.str;
+package com.lzumetal.javalean.basic;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
  * @author liaosi
  * @date 2021-11-04
  */
-public class MainTest {
+public class StrTest {
 
     @Test
     public void hashcode() {
